@@ -10,11 +10,11 @@ from src.domain.users.services import (
 
 class UserContainer(containers.DeclarativeContainer):
 
-    db = providers.Dependency()
+    tenant_db = providers.Dependency()
 
     user_repository = providers.Factory(
         UserRepository,
-        session_factory=db.provided.session,
+        session_factory=tenant_db.provided.session,
     )
 
     create_user_service = providers.Factory(

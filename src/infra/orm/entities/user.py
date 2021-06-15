@@ -1,10 +1,10 @@
 from sqlalchemy import Column, String, Integer, Boolean
 
-from src.config.database import Base
+from src.config.database import TenantBase
 
 
-class User(Base):
-    
+class User(TenantBase):
+
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, index=True)
