@@ -1,5 +1,4 @@
-from typing import Callable, ContextManager, Iterator
-from sqlalchemy.orm import Session
+from typing import Iterator
 
 from src.infra.orm.entities.user import User
 from src.domain.users.models.user_models import CreateUserModel, UserModel

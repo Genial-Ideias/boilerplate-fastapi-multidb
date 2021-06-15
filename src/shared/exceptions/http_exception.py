@@ -1,0 +1,3 @@
+from fastapi import HTTPException as FastApiHttpException
+
+class HttpException(FastApiHttpException): ...

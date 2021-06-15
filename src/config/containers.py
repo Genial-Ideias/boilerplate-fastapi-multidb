@@ -15,7 +15,7 @@ class Container(containers.DeclarativeContainer):
         )
     tenant_db = providers.Singleton(TenantDatabase)
 
-    tenant_container = providers.Container(TenantContainer, db=db)
+    tenant_container = providers.Container(TenantContainer, db=db, tenant_db=tenant_db)
     user_container = providers.Container(UserContainer, tenant_db=tenant_db)
 
 

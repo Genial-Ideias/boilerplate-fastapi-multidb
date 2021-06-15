@@ -2,8 +2,6 @@ import typer
 from dependency_injector.wiring import inject
 
 from src.config.containers import Container
-from src.config.database import TenantDatabase
-from src.config.tenant_config import get_tenant_connections
 
 from src.domain.users.models.user_models import CreateUserModel
 
@@ -19,8 +17,7 @@ def create(
     email: str = typer.Option(..., prompt=True),
     password: str = typer.Option(..., prompt=True),
     ):
-    tenant_db: TenantDatabase = container.tenant_db()
-    tenant_db.identify_connection(f'sqlite:///./core_{tenant}.db')
+    container.tenant_container.identify_connection_service().identify_connection(tenant)
     user_repo = container.user_container.user_repository()
     create_user_model = CreateUserModel(
         name=name,
@@ -34,8 +31,7 @@ def create(
 @app.command()
 @inject
 def list_users(tenant: str):
-    tenant_db: TenantDatabase = container.tenant_db()
-    tenant_db.identify_connection(f'sqlite:///./core_{tenant}.db')
+    container.tenant_container.identify_connection_service().identify_connection(tenant)
     user_repo = container.user_container.user_repository()
 
     users = user_repo.list_users()

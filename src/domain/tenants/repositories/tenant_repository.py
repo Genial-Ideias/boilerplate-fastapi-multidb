@@ -34,3 +34,7 @@ class TenantRepository:
         with self.session_factory() as session:
             return session.query(Tenant).all()
 
+    def get_by_code(self, code: int) -> TenantModel:
+        with self.session_factory() as session:
+            return session.query(Tenant).filter(Tenant.code == code).first()
+
