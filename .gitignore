@@ -10,3 +10,4 @@ store.db
 test.db
 htmlcov
 .coverage
+*.db
